@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รู้จักกัญชา | เว็บไซต์ให้ความรู้เรื่องกัญชา</title>
+<style>
+  :root{
+    --green-900:#14361f;
+    --green-700:#1f5c30;
+    --green-500:#2e8b45;
+    --green-300:#7fc98f;
+    --green-100:#eaf7ee;
+    --amber:#d9a441;
+    --ink:#1b2320;
+    --paper:#fbfdf9;
+    --card:#ffffff;
+    --muted:#5c6b61;
+    --radius:14px;
+    --shadow:0 8px 24px rgba(20,54,31,0.10);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Sarabun","Segoe UI",Tahoma,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.7;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* Header */
+  header.site{
+    background:linear-gradient(135deg,var(--green-900),var(--green-700) 60%,var(--green-500));
+    color:#fff;
+    padding:18px 0;
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 4px 18px rgba(0,0,0,0.15);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.25rem;letter-spacing:.3px;}
+  .brand .leaf{
+    width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,0.15);border-radius:50%;font-size:18px;
+  }
+  nav.links{display:flex;gap:22px;flex-wrap:wrap;font-size:.95rem;}
+  nav.links a{
+    text-decoration:none;opacity:.9;padding:6px 2px;border-bottom:2px solid transparent;
+    transition:.2s;
+  }
+  nav.links a:hover{opacity:1;border-color:var(--amber);}
+
+  /* Hero */
+  .hero{
+    background:
+      radial-gradient(circle at 85% 20%, rgba(217,164,65,0.18), transparent 45%),
+      linear-gradient(160deg,var(--green-900),var(--green-700));
+    color:#fff;
+    padding:72px 0 90px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; right:-60px; bottom:-60px;
+    width:280px;height:280px;border-radius:50%;
+    background:rgba(127,201,143,0.15);
+  }
+  .hero h1{font-size:clamp(1.9rem,4vw,3rem);margin:0 0 16px;font-weight:800;}
+  .hero p{max-width:600px;font-size:1.08rem;color:#e6f3e9;margin:0 0 28px;}
+  .badge-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px;}
+  .badge{
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.25);
+    padding:6px 14px;border-radius:999px;font-size:.85rem;
+  }
+  .cta{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--amber);color:#2b1c00;font-weight:700;
+    padding:13px 26px;border-radius:999px;text-decoration:none;
+    box-shadow:0 6px 18px rgba(217,164,65,0.35);
+    transition:transform .15s;
+  }
+  .cta:hover{transform:translateY(-2px);}
+
+  /* Sections */
+  section{padding:64px 0;}
+  .section-title{
+    text-align:center;margin-bottom:10px;
+    font-size:clamp(1.5rem,3vw,2rem); font-weight:800; color:var(--green-900);
+  }
+  .section-sub{
+    text-align:center;color:var(--muted);max-width:640px;margin:0 auto 44px;font-size:1rem;
+  }
+
+  /* Cards grid */
+  .grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
+  .card{
+    background:var(--card);border-radius:var(--radius);padding:26px 22px;
+    box-shadow:var(--shadow); border:1px solid #eef3ee;
+    transition:transform .2s, box-shadow .2s;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(20,54,31,0.14);}
+  .card .icon{
+    width:46px;height:46px;border-radius:12px;background:var(--green-100);
+    display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px;
+  }
+  .card h3{margin:0 0 8px;color:var(--green-900);font-size:1.08rem;}
+  .card p{margin:0;color:var(--muted);font-size:.95rem;}
+
+  /* Alt background section */
+  .alt{background:var(--green-100);}
+
+  /* Two column */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+  @media (max-width:820px){.two-col{grid-template-columns:1fr;}}
+  .panel{
+    background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1px solid #eef3ee;
+  }
+  .panel h3{color:var(--green-900);margin-top:0;}
+  .checklist{list-style:none;margin:0;padding:0;}
+  .checklist li{
+    padding:10px 0 10px 30px;position:relative;border-bottom:1px dashed #e3e9e3;color:var(--muted);
+  }
+  .checklist li:last-child{border-bottom:none;}
+  .checklist li::before{
+    content:"✓";position:absolute;left:0;top:9px;
+    width:20px;height:20px;border-radius:50%;background:var(--green-500);color:#fff;
+    font-size:12px;display:flex;align-items:center;justify-content:center;
+  }
+  .warn-list li::before{content:"!";background:var(--amber);color:#2b1c00;}
+
+  /* Timeline / law */
+  .law-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+  .law-card{
+    border-left:4px solid var(--green-500);
+    background:var(--card);padding:20px 22px;border-radius:0 var(--radius) var(--radius) 0;
+    box-shadow:var(--shadow);
+  }
+  .law-card h4{margin:0 0 6px;color:var(--green-900);}
+  .law-card p{margin:0;color:var(--muted);font-size:.93rem;}
+
+  /* FAQ */
+  .faq-item{
+    background:var(--card);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);
+    border:1px solid #eef3ee; overflow:hidden;
+  }
+  .faq-item summary{
+    cursor:pointer;padding:18px 22px;font-weight:700;color:var(--green-900);
+    list-style:none;display:flex;justify-content:space-between;align-items:center;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+";font-size:1.4rem;color:var(--green-500);transition:.2s;}
+  .faq-item[open] summary::after{content:"−";}
+  .faq-item .faq-body{padding:0 22px 20px;color:var(--muted);}
+
+  /* Disclaimer / notice */
+  .notice{
+    background:#fff7e6;border:1px solid #f0d9a6;color:#6b4e14;
+    border-radius:var(--radius); padding:22px 26px; font-size:.95rem;
+  }
+  .notice strong{color:#4a3200;}
+
+  /* Footer */
+  footer{
+    background:var(--green-900);color:#cfe8d6;padding:40px 0 24px;font-size:.9rem;
+  }
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+  footer a{text-decoration:none;color:#cfe8d6;opacity:.85;}
+  footer a:hover{opacity:1;text-decoration:underline;}
+  .foot-bottom{
+    text-align:center;margin-top:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.1);
+    opacity:.7;font-size:.82rem;
+  }
+
+  ::selection{background:var(--green-300);color:var(--green-900);}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <div class="brand"><span class="leaf">🌿</span> รู้จักกัญชา</div>
+    <nav class="links">
+      <a href="#about">กัญชาคืออะไร</a>
+      <a href="#health">ผลต่อสุขภาพ</a>
+      <a href="#law">กฎหมายไทย</a>
+      <a href="#safety">ใช้อย่างปลอดภัย</a>
+      <a href="#faq">คำถามที่พบบ่อย</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="badge-row">
+      <span class="badge">📚 เนื้อหาเพื่อการศึกษา</span>
+      <span class="badge">🇹🇭 อ้างอิงบริบทกฎหมายไทย</span>
+    </div>
+    <h1>ความรู้เรื่องกัญชา<br>อย่างรอบด้านและถูกต้อง</h1>
+    <p>เว็บไซต์นี้จัดทำขึ้นเพื่อให้ข้อมูลพื้นฐานเกี่ยวกับกัญชา ทั้งด้านการแพทย์ ผลต่อร่างกายและจิตใจ
+      สถานะทางกฎหมาย และแนวทางการใช้อย่างปลอดภัย เหมาะสำหรับผู้ที่ต้องการทำความเข้าใจก่อนตัดสินใจใดๆ</p>
+    <a class="cta" href="#about">เริ่มอ่านเนื้อหา ↓</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <h2 class="section-title">กัญชาคืออะไร</h2>
+    <p class="section-sub">ทำความเข้าใจพื้นฐานทางพฤกษศาสตร์และสารสำคัญในกัญชา ก่อนศึกษาหัวข้ออื่นต่อไป</p>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">🌱</div>
+        <h3>พืชในสกุล Cannabis</h3>
+        <p>กัญชา (Cannabis sativa) เป็นพืชล้มลุกที่มนุษย์ใช้มานานหลายพันปี ทั้งในทางการแพทย์ อุตสาหกรรม และวัฒนธรรม</p>
+      </div>
+      <div class="card">
+        <div class="icon">🧪</div>
+        <h3>สารแคนนาบินอยด์</h3>
+        <p>สารออกฤทธิ์หลักคือ THC (มีฤทธิ์ต่อจิตประสาท) และ CBD (ไม่มีฤทธิ์เมา ใช้ในทางการแพทย์เป็นหลัก)</p>
+      </div>
+      <div class="card">
+        <div class="icon">🎯</div>
+        <h3>รูปแบบการใช้</h3>
+        <p>มีทั้งการสูบ การรับประทาน น้ำมันสกัด และผลิตภัณฑ์ทางการแพทย์ แต่ละรูปแบบมีระยะเวลาออกฤทธิ์ต่างกัน</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="health" class="alt">
+  <div class="wrap">
+    <h2 class="section-title">ผลต่อสุขภาพ</h2>
+    <p class="section-sub">กัญชามีทั้งประโยชน์ทางการแพทย์และความเสี่ยงที่ควรทราบก่อนใช้</p>
+    <div class="two-col">
+      <div class="panel">
+        <h3>🩺 ประโยชน์ที่มีการศึกษา</h3>
+        <ul class="checklist">
+          <li>บรรเทาอาการปวดเรื้อรังในผู้ป่วยบางกลุ่ม</li>
+          <li>ลดอาการคลื่นไส้จากเคมีบำบัด</li>
+          <li>ช่วยเพิ่มความอยากอาหารในผู้ป่วยบางโรค</li>
+          <li>ใช้ร่วมในการรักษาโรคลมชักบางชนิด (ภายใต้การดูแลแพทย์)</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>⚠️ ความเสี่ยงที่ควรระวัง</h3>
+        <ul class="checklist warn-list">
+          <li>ผลต่อความจำและสมาธิ โดยเฉพาะการใช้ต่อเนื่อง</li>
+          <li>เสี่ยงต่อสุขภาพจิตในผู้ที่มีความเสี่ยงทางพันธุกรรม</li>
+          <li>ไม่เหมาะกับผู้เยาว์ สตรีมีครรภ์ และให้นมบุตร</li>
+          <li>อาจเกิดการพึ่งพาทางจิตใจได้หากใช้ไม่เหมาะสม</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="law">
+  <div class="wrap">
+    <h2 class="section-title">สถานะทางกฎหมายในประเทศไทย</h2>
+    <p class="section-sub">ภาพรวมกฎเกณฑ์สำคัญที่ควรทราบ (โปรดตรวจสอบประกาศล่าสุดจากหน่วยงานราชการเสมอ)</p>
+    <div class="law-grid">
+      <div class="law-card">
+        <h4>การปลูกเพื่อใช้ในครัวเรือน</h4>
+        <p>ต้องจดแจ้งผ่านระบบของสำนักงานคณะกรรมการอาหารและยา (อย.) ก่อนปลูก</p>
+      </div>
+      <div class="law-card">
+        <h4>การใช้ทางการแพทย์</h4>
+        <p>ผลิตภัณฑ์ที่มี THC เกินเกณฑ์กำหนดต้องอยู่ภายใต้การควบคุมและคำแนะนำของแพทย์</p>
+      </div>
+      <div class="law-card">
+        <h4>ข้อห้ามสำคัญ</h4>
+        <p>ห้ามจำหน่ายหรือใช้กับผู้มีอายุต่ำกว่า 20 ปี สตรีมีครรภ์ และผู้ให้นมบุตร</p>
+      </div>
+      <div class="law-card">
+        <h4>สถานที่สาธารณะ</h4>
+        <p>ห้ามสูบในที่สาธารณะ เนื่องจากเข้าข่ายเหตุรำคาญตามกฎหมาย มีโทษปรับ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="safety" class="alt">
+  <div class="wrap">
+    <h2 class="section-title">แนวทางการใช้อย่างปลอดภัย</h2>
+    <p class="section-sub">หากอยู่ในบริบทที่ถูกกฎหมายและเหมาะสม ควรคำนึงถึงหลักปฏิบัติต่อไปนี้</p>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">👨‍⚕️</div>
+        <h3>ปรึกษาแพทย์ก่อนเสมอ</h3>
+        <p>โดยเฉพาะผู้มีโรคประจำตัว หรือรับประทานยาอื่นอยู่ เพื่อหลีกเลี่ยงปฏิกิริยาระหว่างยา</p>
+      </div>
+      <div class="card">
+        <div class="icon">📏</div>
+        <h3>เริ่มจากปริมาณน้อย</h3>
+        <p>ร่างกายแต่ละคนตอบสนองต่างกัน ควรเริ่มในปริมาณต่ำและสังเกตอาการก่อนเพิ่ม</p>
+      </div>
+      <div class="card">
+        <div class="icon">🚗</div>
+        <h3>ห้ามขับขี่หรือใช้เครื่องจักร</h3>
+        <p>หลังใช้กัญชา การตัดสินใจและปฏิกิริยาตอบสนองจะช้าลง เสี่ยงต่ออุบัติเหตุ</p>
+      </div>
+      <div class="card">
+        <div class="icon">🏠</div>
+        <h3>ใช้ในพื้นที่ส่วนตัว</h3>
+        <p>เพื่อหลีกเลี่ยงผลกระทบต่อผู้อื่นและการกระทำผิดกฎหมายที่เกี่ยวกับสถานที่สาธารณะ</p>
+      </div>
+      <div class="card">
+        <div class="icon">🧒</div>
+        <h3>เก็บให้พ้นมือเด็ก</h3>
+        <p>จัดเก็บผลิตภัณฑ์ในภาชนะปิดมิดชิด พ้นสายตาและมือของเด็กและสัตว์เลี้ยง</p>
+      </div>
+      <div class="card">
+        <div class="icon">🤝</div>
+        <h3>ไม่ใช้ร่วมกับแอลกอฮอล์</h3>
+        <p>การใช้ร่วมกันอาจเพิ่มฤทธิ์กดประสาทและเพิ่มความเสี่ยงต่อสุขภาพอย่างมาก</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2 class="section-title">คำถามที่พบบ่อย</h2>
+    <p class="section-sub">รวมคำถามยอดฮิตเกี่ยวกับกัญชาที่หลายคนสงสัย</p>
+
+    <details class="faq-item">
+      <summary>กัญชาทางการแพทย์ต่างจากกัญชาทั่วไปอย่างไร?</summary>
+      <div class="faq-body">กัญชาทางการแพทย์ผ่านการควบคุมสัดส่วนสาร THC/CBD และคุณภาพการผลิตตามมาตรฐาน ใช้ภายใต้คำแนะนำแพทย์เพื่อวัตถุประสงค์การรักษาโรคเฉพาะทาง ต่างจากการใช้ทั่วไปที่ไม่มีการควบคุมปริมาณและคุณภาพ</div>
+    </details>
+    <details class="faq-item">
+      <summary>CBD ทำให้ "เมา" หรือไม่?</summary>
+      <div class="faq-body">โดยทั่วไป CBD ไม่มีฤทธิ์ต่อจิตประสาทแบบเดียวกับ THC จึงไม่ทำให้เกิดอาการเมา แต่ยังอาจมีผลต่อร่างกาย เช่น ทำให้ง่วงซึม จึงควรใช้ตามคำแนะนำ</div>
+    </details>
+    <details class="faq-item">
+      <summary>ใช้กัญชาแล้วขับรถได้หรือไม่?</summary>
+      <div class="faq-body">ไม่ควรอย่างยิ่ง กัญชาส่งผลต่อสมาธิ การตัดสินใจ และเวลาตอบสนอง การขับขี่ขณะมีฤทธิ์กัญชาในร่างกายมีความเสี่ยงสูงต่ออุบัติเหตุและอาจผิดกฎหมาย</div>
+    </details>
+    <details class="faq-item">
+      <summary>จะขอคำปรึกษาเรื่องการใช้กัญชาทางการแพทย์ได้ที่ไหน?</summary>
+      <div class="faq-body">สามารถปรึกษาแพทย์แผนไทยประยุกต์ แพทย์เฉพาะทาง หรือคลินิกกัญชาทางการแพทย์ที่ได้รับอนุญาตจากกระทรวงสาธารณสุข เพื่อรับคำแนะนำที่เหมาะสมกับสภาวะร่างกายของแต่ละบุคคล</div>
+    </details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="notice">
+      <strong>ข้อควรทราบ:</strong> เนื้อหาในเว็บไซต์นี้จัดทำขึ้นเพื่อการให้ความรู้ทั่วไปเท่านั้น ไม่ใช่คำแนะนำทางการแพทย์หรือกฎหมาย
+      กฎระเบียบเกี่ยวกับกัญชาอาจมีการเปลี่ยนแปลง โปรดตรวจสอบข้อมูลล่าสุดจากสำนักงานคณะกรรมการอาหารและยา (อย.) กระทรวงสาธารณสุข
+      หรือปรึกษาผู้เชี่ยวชาญโดยตรงก่อนตัดสินใจใดๆ
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="font-weight:700;font-size:1.1rem;margin-bottom:8px;">🌿 รู้จักกัญชา</div>
+      <div style="opacity:.75;max-width:320px;">เว็บไซต์ให้ความรู้เรื่องกัญชาอย่างรอบด้าน เพื่อการตัดสินใจที่ปลอดภัยและถูกต้องตามกฎหมาย</div>
+    </div>
+    <div>
+      <div style="font-weight:700;margin-bottom:8px;">ลิงก์ด่วน</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <a href="#about">กัญชาคืออะไร</a>
+        <a href="#health">ผลต่อสุขภาพ</a>
+        <a href="#law">กฎหมายไทย</a>
+        <a href="#safety">ใช้อย่างปลอดภัย</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom wrap">© 2026 รู้จักกัญชา — เนื้อหาเพื่อการศึกษาเท่านั้น</div>
+</footer>
+
+</body>
+</html>
